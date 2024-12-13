@@ -3,6 +3,8 @@
 | open_service           | True                                    | 开启页面服务，用于控制是否启动结果页面服务；如果使用青龙等平台部署，有专门设定的定时任务，需要更新完成后停止运行，可以关闭该功能                          |
 | open_update            | True                                    | 开启更新，用于控制是否更新接口，若关闭则所有工作模式（获取接口和测速）均停止                                                    |
 | open_use_old_result    | True                                    | 开启使用历史更新结果（包含模板与结果文件的接口），合并至本次更新中                                                         |
+| open_use_cache         | True                                    | 开启使用本地缓存数据，适用于查询请求失败场景                                                                    |
+| open_request           | False                                   | 开启查询请求，数据来源于网络                                                                            |
 | open_driver            | True                                    | 开启浏览器运行，若更新无数据可开启此模式，较消耗性能                                                                |
 | open_proxy             | False                                   | 开启代理，自动获取免费可用代理，若更新无数据可开启此模式                                                              |
 | source_file            | config/demo.txt                         | 模板文件路径                                                                                    |
@@ -15,6 +17,8 @@
 | sort_timeout           | 5                                       | 单个接口测速超时时长，单位秒(s)；数值越大测速所属时间越长，能提高获取接口数量，但质量会有所下降；数值越小测速所需时间越短，能获取低延时的接口，质量较好；调整此值能优化更新时间 |
 | open_ffmpeg            | True                                    | 开启使用 FFmpeg 进行测速，获取更准确的速度与分辨率信息，需要提前手动安装                                                  |
 | open_m3u_result        | True                                    | 开启转换生成 m3u 文件类型结果链接，支持显示频道图标                                                              |
+| open_filter_speed      | True                                    | 开启速率过滤，低于最小速率（min_speed）的接口将会被过滤                                                          |
+| min_speed              | 0.5                                     | 接口最小速率（单位M/s），需要开启 open_filter_speed 才能生效                                                 |
 | open_filter_resolution | True                                    | 开启分辨率过滤，低于最小分辨率（min_resolution）的接口将会被过滤                                                   |
 | min_resolution         | 1920x1080                               | 接口最小分辨率，需要开启 open_filter_resolution 才能生效                                                  |
 | speed_weight           | 0.5                                     | 速率权重值（所有权重值总和应为 1）                                                                        |
