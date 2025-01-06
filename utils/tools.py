@@ -13,7 +13,7 @@ from time import time
 
 import requests
 from bs4 import BeautifulSoup
-from flask import render_template_string, send_file
+from flask import send_file, make_response
 
 import utils.constants as constants
 from utils.config import config
@@ -133,19 +133,25 @@ def get_resolution_value(resolution_str):
     """
     Get resolution value from string
     """
-    pattern = r"(\d+)[xX*](\d+)"
-    match = re.search(pattern, resolution_str)
-    if match:
-        width, height = map(int, match.groups())
-        return width * height
-    else:
-        return 0
+    try:
+        if resolution_str:
+            pattern = r"(\d+)[xX*](\d+)"
+            match = re.search(pattern, resolution_str)
+            if match:
+                width, height = map(int, match.groups())
+                return width * height
+    except:
+        pass
+    return 0
 
 
 def get_total_urls(info_list, ipv_type_prefer, origin_type_prefer):
     """
     Get the total urls from info list
     """
+    origin_prefer_bool = bool(origin_type_prefer)
+    if not origin_prefer_bool:
+        origin_type_prefer = ["all"]
     categorized_urls = {
         origin: {"ipv4": [], "ipv6": []} for origin in origin_type_prefer
     }
@@ -154,22 +160,17 @@ def get_total_urls(info_list, ipv_type_prefer, origin_type_prefer):
         if not origin:
             continue
 
-        if origin == "important":
-            im_url, _, im_info = url.partition("$")
-            im_info_value = im_info.partition("!")[2]
-            total_urls.append(f"{im_url}${im_info_value}" if im_info_value else im_url)
+        if origin == "whitelist":
+            w_url, _, w_info = url.partition("$")
+            w_info_value = w_info.partition("!")[2] or "白名单"
+            total_urls.append(add_url_info(w_url, w_info_value))
             continue
 
         if origin == "subscribe" and "/rtp/" in url:
             origin = "multicast"
 
-        if origin not in origin_type_prefer:
+        if origin_prefer_bool and (origin not in origin_type_prefer):
             continue
-
-        if config.open_filter_resolution and resolution:
-            resolution_value = get_resolution_value(resolution)
-            if resolution_value < config.min_resolution_value:
-                continue
 
         pure_url, _, info = url.partition("$")
         if not info:
@@ -183,6 +184,9 @@ def get_total_urls(info_list, ipv_type_prefer, origin_type_prefer):
 
         if resolution:
             url = add_url_info(url, resolution)
+
+        if not origin_prefer_bool:
+            origin = "all"
 
         if url_is_ipv6:
             categorized_urls[origin]["ipv6"].append(url)
@@ -205,7 +209,7 @@ def get_total_urls(info_list, ipv_type_prefer, origin_type_prefer):
                 if not urls:
                     break
                 limit = min(
-                    max(config.source_limits[origin] - ipv_num[ipv_type], 0),
+                    max(config.source_limits.get(origin, urls_limit) - ipv_num[ipv_type], 0),
                     max(config.ipv_limit[ipv_type] - ipv_num[ipv_type], 0),
                 )
                 limit_urls = urls[:limit]
@@ -222,9 +226,7 @@ def get_total_urls(info_list, ipv_type_prefer, origin_type_prefer):
             for ipv_type in ipv_type_total:
                 if len(total_urls) >= urls_limit:
                     break
-                extra_urls = categorized_urls[origin][ipv_type][
-                             : config.source_limits[origin]
-                             ]
+                extra_urls = categorized_urls[origin][ipv_type][: config.source_limits.get(origin, urls_limit)]
                 total_urls.extend(extra_urls)
                 total_urls = list(dict.fromkeys(total_urls))[:urls_limit]
 
@@ -315,8 +317,7 @@ def merge_objects(*objects):
                     dict1[key].update(value)
                 elif isinstance(dict1[key], list):
                     if value:
-                        dict1[key].extend(value)
-                        dict1[key] = list(set(dict1[key]))
+                        dict1[key].extend(x for x in value if x not in dict1[key])
                 elif value:
                     dict1[key] = {dict1[key], value}
             else:
@@ -354,7 +355,7 @@ def convert_to_m3u():
     user_final_file = resource_path(config.final_file)
     if os.path.exists(user_final_file):
         with open(user_final_file, "r", encoding="utf-8") as file:
-            m3u_output = '#EXTM3U x-tvg-url="https://live.fanmingming.com/e.xml"\n'
+            m3u_output = '#EXTM3U x-tvg-url="https://live.fanmingming.cn/e.xml"\n'
             current_group = None
             for line in file:
                 trimmed_line = line.strip()
@@ -374,7 +375,7 @@ def convert_to_m3u():
                                       + ("+" if m.group(3) else ""),
                             original_channel_name,
                         )
-                        m3u_output += f'#EXTINF:-1 tvg-name="{processed_channel_name}" tvg-logo="https://live.fanmingming.com/tv/{processed_channel_name}.png"'
+                        m3u_output += f'#EXTINF:-1 tvg-name="{processed_channel_name}" tvg-logo="https://live.fanmingming.cn/tv/{processed_channel_name}.png"'
                         if current_group:
                             m3u_output += f' group-title="{current_group}"'
                         m3u_output += f",{original_channel_name}\n{channel_link}\n"
@@ -404,10 +405,9 @@ def get_result_file_content(show_content=False, file_type=None):
             content = file.read()
     else:
         content = constants.waiting_tip
-    return render_template_string(
-        "<head><link rel='icon' href='{{ url_for('static', filename='images/favicon.ico') }}' type='image/x-icon'></head><pre>{{ content }}</pre>",
-        content=content,
-    )
+    response = make_response(content)
+    response.mimetype = 'text/plain'
+    return response
 
 
 def remove_duplicates_from_tuple_list(tuple_list, seen, flag=None, force_str=None):
@@ -443,8 +443,8 @@ def process_nested_dict(data, seen, flag=None, force_str=None):
             data[key] = remove_duplicates_from_tuple_list(value, seen, flag, force_str)
 
 
-url_domain_pattern = re.compile(
-    r"\b((https?):\/\/)?(\[[0-9a-fA-F:]+\]|([\w-]+\.)+[\w-]+)(:[0-9]{1,5})?\b"
+url_domain_compile = re.compile(
+    constants.url_domain_pattern
 )
 
 
@@ -452,7 +452,7 @@ def get_url_domain(url):
     """
     Get the url domain
     """
-    matcher = url_domain_pattern.search(url)
+    matcher = url_domain_compile.search(url)
     if matcher:
         return matcher.group()
     return None
@@ -476,11 +476,11 @@ def format_url_with_cache(url, cache=None):
     return add_url_info(url, f"cache:{cache}") if cache else url
 
 
-def remove_cache_info(str):
+def remove_cache_info(string):
     """
     Remove the cache info from the string
     """
-    return re.sub(r"[^a-zA-Z\u4e00-\u9fa5\$]?cache:.*", "", str)
+    return re.sub(r"[^a-zA-Z\u4e00-\u9fa5$]?cache:.*", "", string)
 
 
 def resource_path(relative_path, persistent=False):
