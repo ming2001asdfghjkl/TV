@@ -1,8 +1,7 @@
 🕘️更新时间,#genre#
-2025-10-20 06:27:50,http://106.53.99.30/tv/cctv13.php
+2025-10-20 18:33:08,http://zqh2333.top:2222/rtp/239.93.55.54:5140
 
 📺央视频道,#genre#
-CCTV-13,http://106.53.99.30/tv/cctv13.php
 CCTV-16,http://zqh2333.top:2222/rtp/239.93.55.54:5140
 CETV1,http://player.cntv.cn/standard/live_HLSDRM20180524.swf?ChannelID=cetv1&videoTVChannel=cetv1&P2PChannelID=pd://cctv_p2p_hdcetv1&tai=cetv1&VideoName=cetv1&channelID=cetv1
 CETV1,rtsp://115.153.254.81/PLTV/88888888/224/3221226858/63768493.smil
@@ -50,6 +49,7 @@ Viutv,https://cdn.iptv8k.top/dl/jrys.php?id=78&time=20240926215313&ip=111.229.25
 东森超视,https://cdn.iptv8k.top/dl/jrys.php?id=216&time=20240926215313&ip=111.229.253.40#rtmp://f13h.mine.nu/sat/tv331#rtmp://f13h.mine.nu/sat/tv331
 东森超视,http://38.64.72.148:80/hls/modn/list/2013/chunklist1.m3u8
 东森电影,https://cdn.iptv8k.top/dl/jrys.php?id=231&time=20240926215313&ip=111.229.253.40
+Now华剧,http://iptv.4666888.xyz/iptv2A.php?id=84
 靖天资讯,https://cdn.iptv8k.top/dl/jrys.php?id=315&time=20240926215313&ip=111.229.253.40
 
 🎬电影频道,#genre#
@@ -64,7 +64,6 @@ CHC高清电影,rtsp://115.153.222.112:554/PLTV/88888888/224/3221226990/86128784
 靖天映画,https://cdn.iptv8k.top/dl/jrys.php?id=320&time=20240926215313&ip=111.229.253.40
 靖天戏剧,https://cdn.iptv8k.top/dl/jrys.php?id=318&time=20240926215313&ip=111.229.253.40
 经典电影,https://cdn.iptv8k.top/dl/jrys.php?id=396&time=20240926215313&ip=111.229.253.40
-IPTV经典电影,http://139.129.231.228/rtp/239.21.1.124:5002
 天映经典,https://cdn.iptv8k.top/dl/jrys.php?id=71&time=20240926215313&ip=111.229.253.40
 星空卫视,https://cdn.iptv8k.top/dl/jrys.php?id=21&time=20240926215313&ip=111.229.253.40
 星空卫视,http://122.53.222.9:9981/stream/channelid/2084767267?profile=pass
@@ -100,12 +99,10 @@ IPTV经典电影,http://139.129.231.228/rtp/239.21.1.124:5002
 新动漫,rtsp://115.153.233.154/PLTV/88888888/224/3221226973/86129004.smil
 CN卡通,https://cdn.iptv8k.top/dl/jrys.php?id=364&time=20240926215313&ip=111.229.253.40
 CN卡通,http://125.227.210.55:8167/VideoInput/play.ts
-24H国漫热播,https://lunbo.freetv.top/yy/1353937086
 蜡笔小新,http://www.douzhicloud.site:35455/bilibili/30837590
 
 🎮游戏频道,#genre#
 游戏竞技,http://ygbh.site/php/bfgd.php?id=296
-海看电竞,http://139.129.231.228/rtp/239.21.1.135:5002
 
 🎵音乐频道,#genre#
 音乐现场,http://satellitepull.cnr.cn/live/wx32nmgyygb/playlist.m3u8
