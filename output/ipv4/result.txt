@@ -1,5 +1,5 @@
 🕘️更新时间,#genre#
-2025-10-22 18:34:15,https://httop.top/tv-cctv3
+2025-10-23 06:26:06,https://httop.top/tv-cctv3
 
 📺央视频道,#genre#
 CCTV-3,https://httop.top/tv-cctv3
@@ -63,10 +63,11 @@ CHC高清电影,http://dassby.qqff.top:99/live/CHC高清/index.m3u8
 CHC高清电影,rtsp://115.153.247.80/PLTV/88888888/224/3221226990/86128784.smil
 CHC高清电影,rtsp://115.153.230.145/PLTV/88888888/224/3221226990/86128784.smil
 CHC高清电影,rtsp://115.153.222.112:554/PLTV/88888888/224/3221226990/86128784.smil
-淘剧场,http://115.171.216.75:4000/rtp/225.1.8.37:8002
 靖天映画,https://cdn.iptv8k.top/dl/jrys.php?id=320&time=20240926215313&ip=111.229.253.40
 靖天戏剧,https://cdn.iptv8k.top/dl/jrys.php?id=318&time=20240926215313&ip=111.229.253.40
 经典电影,https://cdn.iptv8k.top/dl/jrys.php?id=396&time=20240926215313&ip=111.229.253.40
+IPTV经典电影,http://113.88.211.3:9898/hls/71/index.m3u8
+IPTV经典电影,http://139.129.231.228/rtp/239.21.1.124:5002
 天映经典,https://cdn.iptv8k.top/dl/jrys.php?id=71&time=20240926215313&ip=111.229.253.40
 星空卫视,https://cdn.iptv8k.top/dl/jrys.php?id=21&time=20240926215313&ip=111.229.253.40
 星空卫视,http://122.53.222.9:9981/stream/channelid/2084767267?profile=pass
@@ -76,20 +77,12 @@ CHC高清电影,rtsp://115.153.222.112:554/PLTV/88888888/224/3221226990/86128784
 🎥咪咕直播,#genre#
 
 🏀体育频道,#genre#
+体育赛事,http://139.129.231.228:50060/rtp/239.21.2.44:5002
 山东体育,http://satellitepull.cnr.cn/live/wxsdtyxxgb/playlist.m3u8
 山东体育,https://satellitepull.cnr.cn/live/wxsdtyxxgb/playlist.m3u8
 
 🪁动画频道,#genre#
 少儿动画,http://114.252.126.226:8899/hls/32/index.m3u8
-少儿动画,http://218.15.183.23:9901/tsfile/live/23045_1.m3u8
-少儿动画,http://1b6467f415.iok.la:9931/tsfile/live/1057_1.m3u8
-少儿动画,rtsp://118.212.169.207:554/PLTV/88888888/224/3221227318/10000100000000060000000001945936_0.smil
-少儿动画,rtsp://115.153.245.70/PLTV/88888888/224/3221227006/86440922.smil
-少儿动画,rtsp://115.153.254.81/PLTV/88888888/224/3221227006/86440922.smil
-少儿动画,rtsp://115.153.240.228:554/PLTV/88888888/224/3221227006/86440922.smil
-少儿动画,rtsp://115.153.212.72/PLTV/88888888/224/3221227006/86440922.smil
-少儿动画,rtsp://115.153.247.80/PLTV/88888888/224/3221227006/86440922.smil
-少儿动画,rtsp://115.153.230.145/PLTV/88888888/224/3221227006/86440922.smil
 新动漫,http://dassby.qqff.top:99/live/新动漫/index.m3u8
 新动漫,rtsp://115.153.245.70/PLTV/88888888/224/3221226973/86129004.smil
 新动漫,rtsp://115.153.254.81/PLTV/88888888/224/3221226973/86129004.smil
